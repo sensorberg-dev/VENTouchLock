@@ -89,7 +89,7 @@ static NSString *const VENTouchLockUserDefaultsKeyTouchIDActivated = @"VENTouchL
     [SSKeychain setPassword:passcode forService:service account:account];
 }
 
-- (void)deletePasscode
+- (void)deletePasscodeWithError:(NSError *)error;
 {
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:VENTouchLockUserDefaultsKeyTouchIDActivated];
     [VENTouchLockEnterPasscodeViewController resetPasscodeAttemptHistory];
@@ -97,7 +97,7 @@ static NSString *const VENTouchLockUserDefaultsKeyTouchIDActivated = @"VENTouchL
 
     NSString *service = self.keychainService;
     NSString *account = self.keychainAccount;
-    [SSKeychain deletePasswordForService:service account:account];
+    [SSKeychain deletePasswordForService:service account:account error:&error];
 }
 
 
