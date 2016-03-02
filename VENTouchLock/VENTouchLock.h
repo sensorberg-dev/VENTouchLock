@@ -61,7 +61,7 @@ typedef NS_ENUM(NSUInteger, VENTouchLockTouchIDResponse) {
  Deletes the current passcode. If deletion fails an error will be returned
  @param error - keychain deletion error
  */
-- (void)deletePasscodeWithError:(NSError *)error;
+- (void)deletePasscodeWithError:(NSError *__autoreleasing *)error;
 
 /**
  Returns YES if the device has TouchID enabled and is running a minimum of iOS 8.0, and NO otherwise.
