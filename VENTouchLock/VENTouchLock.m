@@ -1,6 +1,6 @@
 #import "VENTouchLock.h"
 
-#import <SSKeychain/SSKeychain.h>
+#import <SAMKeychain/SAMKeychain.h>
 #import <LocalAuthentication/LocalAuthentication.h>
 #import "UIViewController+VENTouchLock.h"
 
@@ -74,7 +74,7 @@ static NSString *const VENTouchLockUserDefaultsKeyTouchIDActivated = @"VENTouchL
 {
     NSString *service = self.keychainService;
     NSString *account = self.keychainAccount;
-    return [SSKeychain passwordForService:service account:account];
+    return [SAMKeychain passwordForService:service account:account];
 }
 
 - (BOOL)isPasscodeValid:(NSString *)passcode
@@ -86,10 +86,10 @@ static NSString *const VENTouchLockUserDefaultsKeyTouchIDActivated = @"VENTouchL
 {
     NSString *service = self.keychainService;
     NSString *account = self.keychainAccount;
-    [SSKeychain setPassword:passcode forService:service account:account];
+    [SAMKeychain setPassword:passcode forService:service account:account];
 }
 
-- (void)deletePasscodeWithError:(NSError *__autoreleasing *)error;
+- (void)deletePasscode
 {
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:VENTouchLockUserDefaultsKeyTouchIDActivated];
     [VENTouchLockEnterPasscodeViewController resetPasscodeAttemptHistory];
@@ -97,7 +97,7 @@ static NSString *const VENTouchLockUserDefaultsKeyTouchIDActivated = @"VENTouchL
 
     NSString *service = self.keychainService;
     NSString *account = self.keychainAccount;
-    [SSKeychain deletePasswordForService:service account:account error:error];
+    [SAMKeychain deletePasswordForService:service account:account];
 }
 
 
