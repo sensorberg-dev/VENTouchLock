@@ -1,6 +1,6 @@
 #import "VENTouchLockPasscodeView.h"
 #import "VENTouchLockPasscodeCharacterView.h"
-@import AudioToolbox;
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface VENTouchLockPasscodeView ()
 
