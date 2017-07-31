@@ -18,6 +18,11 @@
 @property (strong, nonatomic) UIColor *titleColor;
 
 /**
+ The font of the title text.
+ */
+@property (strong, nonatomic) UIFont *titleFont;
+
+/**
  The color of the passcode characters.
  */
 @property (strong, nonatomic) UIColor *characterColor;
@@ -30,7 +35,7 @@
 /**
  Creates a passcode view controller with the given title and frame.
  */
-- (instancetype)initWithTitle:(NSString *)title frame:(CGRect)frame titleColor:(UIColor *)titleColor characterColor:(UIColor *)characterColor;
+- (instancetype)initWithTitle:(NSString *)title frame:(CGRect)frame titleColor:(UIColor *)titleColor titleFont:(UIFont *)font characterColor:(UIColor *)characterColor;
 
 /**
  Shakes the reciever and vibrates the device.

@@ -8,6 +8,7 @@
  * -----------------------------------------------------------------------------
  */
 @property (strong, nonatomic) UIColor *passcodeViewControllerTitleColor;
+@property (strong, nonatomic) UIFont *passcodeViewControllerTitleFont;
 @property (strong, nonatomic) UIColor *passcodeViewControllerCharacterColor;
 @property (strong, nonatomic) UIColor *passcodeViewControllerBackgroundColor;
 @property (assign, nonatomic) BOOL passcodeViewControllerShouldEmbedInNavigationController;

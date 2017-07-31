@@ -7,6 +7,7 @@
     self = [super init];
     if (self) { // Set default values
         _passcodeViewControllerTitleColor = [UIColor blackColor];
+        _passcodeViewControllerTitleFont = [UIFont systemFontOfSize:17.0f];
         _passcodeViewControllerCharacterColor = [UIColor blackColor];
         _passcodeViewControllerBackgroundColor = [UIColor colorWithRed:239/255.0f green:239/255.0f blue:244/255.0f alpha:1.0f];
         _passcodeViewControllerShouldEmbedInNavigationController = NO;

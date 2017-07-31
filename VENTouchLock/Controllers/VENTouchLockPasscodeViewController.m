@@ -76,6 +76,7 @@ static const NSInteger VENTouchLockViewControllerPasscodeLength = 4;
 {
     VENTouchLockPasscodeView *passcodeView = [[VENTouchLockPasscodeView alloc] init];
     passcodeView.titleColor = self.touchLock.appearance.passcodeViewControllerTitleColor;
+    passcodeView.titleFont = self.touchLock.appearance.passcodeViewControllerTitleFont;
     passcodeView.characterColor = self.touchLock.appearance.passcodeViewControllerCharacterColor;
     [self.view addSubview:passcodeView];
     self.passcodeView = passcodeView;

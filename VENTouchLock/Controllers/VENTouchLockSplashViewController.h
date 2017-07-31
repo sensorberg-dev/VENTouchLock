@@ -26,11 +26,6 @@ typedef NS_ENUM(NSUInteger, VENTouchLockSplashViewControllerUnlockType) {
 /**
  Displays a Touch ID prompt if the device can support it.
  */
-- (void)showUnlockAnimated:(BOOL)animated;
-
-/**
- Displays a Touch ID prompt if the device can support it.
- */
 - (void)showTouchID;
 
 /**

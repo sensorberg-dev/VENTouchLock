@@ -14,7 +14,7 @@
 
 @implementation VENTouchLockPasscodeView
 
-- (instancetype)initWithTitle:(NSString *)title frame:(CGRect)frame titleColor:(UIColor *)titleColor characterColor:(UIColor *)characterColor
+- (instancetype)initWithTitle:(NSString *)title frame:(CGRect)frame titleColor:(UIColor *)titleColor titleFont:(UIFont *)font characterColor:(UIColor *)characterColor
 {
     NSArray *nibArray = [[NSBundle bundleForClass:[self class]] loadNibNamed:NSStringFromClass([self class])
                                                       owner:self options:nil];
@@ -26,6 +26,13 @@
         _titleLabel.text = title;
         _titleColor = titleColor;
         _titleLabel.textColor = titleColor;
+        _titleFont = _titleLabel.font;
+        
+        if (font) {
+            _titleLabel.font = font;
+            _titleFont = font;
+        }
+        
         _characterColor = characterColor;
         _characters = @[_firstCharacter, _secondCharacter, _thirdCharacter, _fourthCharacter];
         for (VENTouchLockPasscodeCharacterView *characterView in _characters) {
@@ -37,7 +44,7 @@
 
 - (instancetype)initWithTitle:(NSString *)title frame:(CGRect)frame;
 {
-    return [self initWithTitle:title frame:frame titleColor:[UIColor blackColor] characterColor:[UIColor blackColor]];
+    return [self initWithTitle:title frame:frame titleColor:[UIColor blackColor] titleFont:nil characterColor:[UIColor blackColor]];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -93,6 +100,12 @@
 {
     _titleColor = titleColor;
     self.titleLabel.textColor = titleColor;
+}
+
+- (void)setTitleFont:(UIFont *)titleFont
+{
+    _titleFont = titleFont;
+    self.titleLabel.font = titleFont;
 }
 
 @end
