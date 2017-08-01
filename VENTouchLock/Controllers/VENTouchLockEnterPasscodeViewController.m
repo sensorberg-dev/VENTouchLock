@@ -56,7 +56,8 @@ NSString *const VENTouchLockEnterPasscodeUserDefaultsKeyNumberOfConsecutivePassc
                 [self recordIncorrectPasscodeAttempt];
             }
         }];
-
+        VENTouchLockEventUnlockPasscodeIncorrect *event = [VENTouchLockEventUnlockPasscodeIncorrect new];
+        PUBLISH(event);
     }
 }
 
@@ -90,9 +91,13 @@ NSString *const VENTouchLockEnterPasscodeUserDefaultsKeyNumberOfConsecutivePassc
 
 - (void)callExceededLimitActionBlock
 {
+    VENTouchLockEventUnlockPasscodeAttemptLimitExceeded *event = [VENTouchLockEventUnlockPasscodeAttemptLimitExceeded new];
+    PUBLISH(event);
+
     [[self parentSplashViewController] dismissWithUnlockSuccess:NO
                                                      unlockType:VENTouchLockSplashViewControllerUnlockTypeNone
                                                        animated:NO];
+    
 }
 
 - (VENTouchLockSplashViewController *)parentSplashViewController

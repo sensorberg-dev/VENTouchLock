@@ -26,6 +26,13 @@ static CGFloat const VENTouchLockCreatePasscodeViewControllerAnimationDuration =
     self.passcodeView.title = [self.touchLock appearance].createPasscodeInitialLabelText;
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    VENTouchLockEventCreatePasscode *event = [VENTouchLockEventCreatePasscode new];
+    event.inputType = VENTouchLockPassCodeInputTypeFirst;
+    PUBLISH(event);
+}
 - (void)enteredPasscode:(NSString *)passcode;
 {
     [super enteredPasscode:passcode];
