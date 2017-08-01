@@ -32,5 +32,11 @@
 @implementation VENTouchLockEventUnlockPasscode
 @end
 
+@implementation VENTouchLockEventUnlockPasscodeIncorrect
+@end
+
+@implementation VENTouchLockEventUnlockPasscodeAttemptLimitExceeded
+@end
+
 @implementation VENTouchLockEventUnlockPasscodeResult
 @end

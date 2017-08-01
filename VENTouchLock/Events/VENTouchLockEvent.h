@@ -28,9 +28,11 @@ typedef NS_ENUM(NSUInteger, VENTouchLockPassCodeInputType) {
 
 #pragma mark - Actual Classes to Listen
 
+// when the app is locked.
 @interface VENTouchLockEventLocked : VENTouchLockEvent
 @end
 
+// when unlock with TouchID screen is appeared
 @interface VENTouchLockEventUnlockTouchID : VENTouchLockEvent
 @end
 
@@ -38,6 +40,7 @@ typedef NS_ENUM(NSUInteger, VENTouchLockPassCodeInputType) {
 @property (nonatomic, assign) VENTouchLockTouchIDResponse response;
 @end
 
+// when Create passcode screen is appeared (first and confirm inputs)
 @interface VENTouchLockEventCreatePasscode : VENTouchLockEvent
 @property (nonatomic, assign) VENTouchLockPassCodeInputType inputType;
 @end
@@ -45,8 +48,18 @@ typedef NS_ENUM(NSUInteger, VENTouchLockPassCodeInputType) {
 @interface VENTouchLockEventCreatePasscodeResult : VENTouchLockEventPasscodeResult
 @end
 
+// when unlock with passcode screen is appeared
 @interface VENTouchLockEventUnlockPasscode : VENTouchLockEvent
 @end
 
+// when user entered wrong passcode
+@interface VENTouchLockEventUnlockPasscodeIncorrect : VENTouchLockEvent
+@end
+
+// when user entered wrong passcode over certain times.
+@interface VENTouchLockEventUnlockPasscodeAttemptLimitExceeded : VENTouchLockEvent
+@end
+
+// when it's completely failed to unlock with passcode
 @interface VENTouchLockEventUnlockPasscodeResult : VENTouchLockEventPasscodeResult
 @end
