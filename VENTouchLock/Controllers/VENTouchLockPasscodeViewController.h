@@ -37,6 +37,10 @@
 - (void)enteredPasscode:(NSString *)passcode;
 
 /**
+ Called when a user cancels to create passcode or enter passcode. */
+- (void)userTappedCancel;
+
+/**
  Called by superclasses in order to dismiss this view controller.
  @param success YES if the intended operation was successful. NO otherwise.
  @param animated YES to animated the view controller's dismissal. NO otherwise.

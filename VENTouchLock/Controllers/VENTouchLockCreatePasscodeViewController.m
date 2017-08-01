@@ -1,6 +1,7 @@
 #import "VENTouchLockCreatePasscodeViewController.h"
 #import "VENTouchLockPasscodeView.h"
 #import "VENTouchLock.h"
+#import <tolo/Tolo.h>
 
 static CGFloat const VENTouchLockCreatePasscodeViewControllerAnimationDuration = 0.2;
 
@@ -46,6 +47,22 @@ static CGFloat const VENTouchLockCreatePasscodeViewControllerAnimationDuration =
     }
 }
 
+- (void)userTappedCancel
+{
+    [super userTappedCancel];
+    VENTouchLockEventCreatePasscodeResult *event = [VENTouchLockEventCreatePasscodeResult new];
+    event.userCanceled = YES;
+    PUBLISH(event);
+}
+
+- (void)finishWithResult:(BOOL)success animated:(BOOL)animated
+{
+    [super finishWithResult:success animated:animated];
+    VENTouchLockEventCreatePasscodeResult *event = [VENTouchLockEventCreatePasscodeResult new];
+    event.success = success;
+    PUBLISH(event);
+}
+
 - (void)showConfirmPasscodeView
 {
     VENTouchLockPasscodeView *firstPasscodeView = self.passcodeView;
@@ -80,6 +97,9 @@ static CGFloat const VENTouchLockCreatePasscodeViewControllerAnimationDuration =
                          [firstPasscodeView removeFromSuperview];
                          self.passcodeView = confirmPasscodeView;
                      }];
+    VENTouchLockEventCreatePasscode *event = [VENTouchLockEventCreatePasscode new];
+    event.inputType = VENTouchLockPassCodeInputTypeConfirm;
+    PUBLISH(event);
 }
 
 - (void)showFirstPasscodeView
@@ -115,6 +135,9 @@ static CGFloat const VENTouchLockCreatePasscodeViewControllerAnimationDuration =
                          [confirmPasscodeView removeFromSuperview];
                          self.passcodeView = firstPasscodeView;
                      }];
+    VENTouchLockEventCreatePasscode *event = [VENTouchLockEventCreatePasscode new];
+    event.inputType = VENTouchLockPassCodeInputTypeFirst;
+    PUBLISH(event);
 }
 
 @end

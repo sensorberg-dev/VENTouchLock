@@ -3,6 +3,7 @@
 #import <SAMKeychain/SAMKeychain.h>
 #import <LocalAuthentication/LocalAuthentication.h>
 #import "UIViewController+VENTouchLock.h"
+#import <tolo/Tolo.h>
 
 static NSString *const VENTouchLockUserDefaultsKeyTouchIDActivated = @"VENTouchLockUserDefaultsKeyTouchIDActivated";
 
@@ -138,13 +139,14 @@ static NSString *const VENTouchLockUserDefaultsKeyTouchIDActivated = @"VENTouchL
                               reply:^(BOOL success, NSError *error) {
                                   isTouchIDPresented = NO;
                                   dispatch_async(dispatch_get_main_queue(), ^{
+                                      VENTouchLockTouchIDResponse response = VENTouchLockTouchIDResponseUndefined;
                                       if (success) {
+                                          response = VENTouchLockTouchIDResponseSuccess;
                                           if (completionBlock) {
-                                              completionBlock(VENTouchLockTouchIDResponseSuccess);
+                                              completionBlock(response);
                                           }
                                       }
                                       else {
-                                          VENTouchLockTouchIDResponse response;
                                           switch (error.code) {
                                               case LAErrorUserFallback:
                                                   response = VENTouchLockTouchIDResponseUsePasscode;
@@ -161,13 +163,21 @@ static NSString *const VENTouchLockUserDefaultsKeyTouchIDActivated = @"VENTouchL
                                               completionBlock(response);
                                           }
                                       }
+                                      VENTouchLockEventUnlockTouchIDResponse *event = [VENTouchLockEventUnlockTouchIDResponse new];
+                                      event.response = response;
+                                      PUBLISH(event);
                                   });
                               }];
+            VENTouchLockEventUnlockTouchID *event = [VENTouchLockEventUnlockTouchID new];
+            PUBLISH(event);
         }
         else {
             if (completionBlock) {
                 completionBlock(VENTouchLockTouchIDResponsePromptAlreadyPresent);
             }
+            VENTouchLockEventUnlockTouchIDResponse *event = [VENTouchLockEventUnlockTouchIDResponse new];
+            event.response = VENTouchLockTouchIDResponsePromptAlreadyPresent;
+            PUBLISH(event);
         }
     }
 }
@@ -215,6 +225,9 @@ static NSString *const VENTouchLockUserDefaultsKeyTouchIDActivated = @"VENTouchL
             });
         }
     }
+    
+    VENTouchLockEventLocked *event = [VENTouchLockEventLocked new];
+    PUBLISH(event);
 }
 
 

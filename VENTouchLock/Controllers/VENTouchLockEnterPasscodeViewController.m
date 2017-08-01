@@ -1,6 +1,7 @@
 #import "VENTouchLockEnterPasscodeViewController.h"
 #import "VENTouchLockPasscodeView.h"
 #import "VENTouchLock.h"
+#import <tolo/Tolo.h>
 
 NSString *const VENTouchLockEnterPasscodeUserDefaultsKeyNumberOfConsecutivePasscodeAttempts = @"VENTouchLockEnterPasscodeUserDefaultsKeyNumberOfConsecutivePasscodeAttempts";
 
@@ -33,6 +34,13 @@ NSString *const VENTouchLockEnterPasscodeUserDefaultsKeyNumberOfConsecutivePassc
     self.passcodeView.title = [self.touchLock appearance].enterPasscodeInitialLabelText;
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    VENTouchLockEventUnlockPasscode *event = [VENTouchLockEventUnlockPasscode new];
+    PUBLISH(event);
+}
+
 - (void)enteredPasscode:(NSString *)passcode
 {
     [super enteredPasscode:passcode];
@@ -50,6 +58,22 @@ NSString *const VENTouchLockEnterPasscodeUserDefaultsKeyNumberOfConsecutivePassc
         }];
 
     }
+}
+
+- (void)userTappedCancel
+{
+    [super userTappedCancel];
+    VENTouchLockEventUnlockPasscodeResult *event = [VENTouchLockEventUnlockPasscodeResult new];
+    event.userCanceled = YES;
+    PUBLISH(event);
+}
+
+- (void)finishWithResult:(BOOL)success animated:(BOOL)animated
+{
+    [super finishWithResult:success animated:animated];
+    VENTouchLockEventUnlockPasscodeResult *event = [VENTouchLockEventUnlockPasscodeResult new];
+    event.success = success;
+    PUBLISH(event);
 }
 
 - (void)recordIncorrectPasscodeAttempt
