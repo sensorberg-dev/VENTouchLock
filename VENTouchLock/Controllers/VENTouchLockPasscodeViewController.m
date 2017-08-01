@@ -62,6 +62,7 @@ static const NSInteger VENTouchLockViewControllerPasscodeLength = 4;
     self.invisiblePasscodeField = [[UITextField alloc] init];
     self.invisiblePasscodeField.keyboardType = UIKeyboardTypeNumberPad;
     self.invisiblePasscodeField.secureTextEntry = YES;
+    self.invisiblePasscodeField.keyboardAppearance = self.touchLock.appearance.passcodeViewControllerKeyboardAppearance;
     self.invisiblePasscodeField.delegate = self;
     [self.invisiblePasscodeField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     [self.view addSubview:self.invisiblePasscodeField];
@@ -77,6 +78,7 @@ static const NSInteger VENTouchLockViewControllerPasscodeLength = 4;
     VENTouchLockPasscodeView *passcodeView = [[VENTouchLockPasscodeView alloc] init];
     passcodeView.titleColor = self.touchLock.appearance.passcodeViewControllerTitleColor;
     passcodeView.titleFont = self.touchLock.appearance.passcodeViewControllerTitleFont;
+    passcodeView.verticalGapTitleAndCharacter = self.touchLock.appearance.passcodeViewVerticalGapTitleAndCharacter;
     passcodeView.characterColor = self.touchLock.appearance.passcodeViewControllerCharacterColor;
     [self.view addSubview:passcodeView];
     self.passcodeView = passcodeView;
@@ -85,6 +87,7 @@ static const NSInteger VENTouchLockViewControllerPasscodeLength = 4;
 
 - (void)userTappedCancel
 {
+    // fire cancel event
     if (self.willFinishWithResult) {
         self.willFinishWithResult(NO);
     }
@@ -94,6 +97,8 @@ static const NSInteger VENTouchLockViewControllerPasscodeLength = 4;
 - (void)finishWithResult:(BOOL)success animated:(BOOL)animated
 {
     [self.invisiblePasscodeField resignFirstResponder];
+    
+    // fire finish event
     if (self.willFinishWithResult) {
         self.willFinishWithResult(success);
     } else {

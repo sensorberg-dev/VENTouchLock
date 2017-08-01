@@ -9,6 +9,7 @@
 @property (weak, nonatomic) IBOutlet VENTouchLockPasscodeCharacterView *secondCharacter;
 @property (weak, nonatomic) IBOutlet VENTouchLockPasscodeCharacterView *thirdCharacter;
 @property (weak, nonatomic) IBOutlet VENTouchLockPasscodeCharacterView *fourthCharacter;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *gapBetweenNumberAndTitle;
 
 @end
 
@@ -35,6 +36,9 @@
         
         _characterColor = characterColor;
         _characters = @[_firstCharacter, _secondCharacter, _thirdCharacter, _fourthCharacter];
+        
+        _verticalGapTitleAndCharacter = _gapBetweenNumberAndTitle.constant;
+        
         for (VENTouchLockPasscodeCharacterView *characterView in _characters) {
             characterView.fillColor = characterColor;
         }
@@ -96,16 +100,20 @@
     }
 }
 
-- (void)setTitleColor:(UIColor *)titleColor
-{
+- (void)setTitleColor:(UIColor *)titleColor {
     _titleColor = titleColor;
     self.titleLabel.textColor = titleColor;
 }
 
-- (void)setTitleFont:(UIFont *)titleFont
-{
+- (void)setTitleFont:(UIFont *)titleFont {
     _titleFont = titleFont;
     self.titleLabel.font = titleFont;
+}
+
+- (void)setVerticalGapTitleAndCharacter:(CGFloat)verticalGapTitleAndCharacter {
+    _verticalGapTitleAndCharacter = verticalGapTitleAndCharacter;
+    self.gapBetweenNumberAndTitle.constant = _verticalGapTitleAndCharacter;
+    [self setNeedsUpdateConstraints];
 }
 
 @end

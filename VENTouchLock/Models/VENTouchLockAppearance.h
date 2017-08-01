@@ -11,6 +11,12 @@
 @property (strong, nonatomic) UIFont *passcodeViewControllerTitleFont;
 @property (strong, nonatomic) UIColor *passcodeViewControllerCharacterColor;
 @property (strong, nonatomic) UIColor *passcodeViewControllerBackgroundColor;
+/**
+ The gap between title label and dotted characters
+ */
+@property (assign, nonatomic) CGFloat passcodeViewVerticalGapTitleAndCharacter;
+
+@property (assign, nonatomic) UIKeyboardAppearance passcodeViewControllerKeyboardAppearance;
 @property (assign, nonatomic) BOOL passcodeViewControllerShouldEmbedInNavigationController;
 @property (strong, nonatomic) NSString *cancelBarButtonItemTitle;
 

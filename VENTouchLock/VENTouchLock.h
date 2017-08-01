@@ -58,8 +58,7 @@ typedef NS_ENUM(NSUInteger, VENTouchLockTouchIDResponse) {
 - (void)setPasscode:(NSString *)passcode;
 
 /**
- Deletes the current passcode. If deletion fails an error will be returned
- @param error - keychain deletion error
+ Deletes the current passcode.
  */
 - (void)deletePasscode;
 

@@ -28,6 +28,11 @@
 @property (strong, nonatomic) UIColor *characterColor;
 
 /**
+ The gap between title label and dotted characters
+ */
+@property (assign, nonatomic) CGFloat verticalGapTitleAndCharacter;
+
+/**
  Creates a passcode view controller with the given title and frame.
  */
 - (instancetype)initWithTitle:(NSString *)title frame:(CGRect)frame;

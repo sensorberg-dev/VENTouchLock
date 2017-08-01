@@ -67,6 +67,7 @@ static CGFloat const VENTouchLockCreatePasscodeViewControllerAnimationDuration =
                                                      titleColor:appearance.passcodeViewControllerTitleColor
                                                      titleFont:appearance.passcodeViewControllerTitleFont
                                                      characterColor:appearance.passcodeViewControllerCharacterColor];
+    confirmPasscodeView.verticalGapTitleAndCharacter = appearance.passcodeViewVerticalGapTitleAndCharacter;
     [self.view addSubview:confirmPasscodeView];
     [UIView animateWithDuration: VENTouchLockCreatePasscodeViewControllerAnimationDuration
                           delay: 0.0
@@ -101,6 +102,7 @@ static CGFloat const VENTouchLockCreatePasscodeViewControllerAnimationDuration =
                                                                                        titleColor:appearance.passcodeViewControllerTitleColor
                                                                                         titleFont:appearance.passcodeViewControllerTitleFont
                                                                                    characterColor:appearance.passcodeViewControllerCharacterColor];
+    firstPasscodeView.verticalGapTitleAndCharacter = appearance.passcodeViewVerticalGapTitleAndCharacter;
     [self.view addSubview:firstPasscodeView];
     [UIView animateWithDuration: VENTouchLockCreatePasscodeViewControllerAnimationDuration
                           delay: 0.0
