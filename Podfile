@@ -2,6 +2,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '6.0'
 
 pod 'SAMKeychain', '~> 1.5.2'
+pod  'tolo', '~> 1.0'
 
 target 'VENTouchLockTests' do
   pod 'Specta', '~> 0.2.1'

@@ -12,6 +12,7 @@ Pod::Spec.new do |s|
   s.source_files = 'VENTouchLock/**/*.{h,m}'
   s.resources   = ["VENTouchLock/**/*.{xib}"]
   s.dependency 'SAMKeychain', '~> 1.0'
+  s.dependency  'tolo', '~> 1.0'
   s.frameworks = 'LocalAuthentication'
   s.platform     = :ios, '7.0'
   s.requires_arc = true

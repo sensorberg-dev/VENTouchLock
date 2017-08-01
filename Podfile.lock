@@ -1,19 +1,24 @@
 PODS:
-  - Expecta (0.3.1)
+  - Expecta (0.4.2)
   - OCMock (2.2.4)
+  - SAMKeychain (1.5.2)
   - Specta (0.2.1)
-  - SSKeychain (1.2.2)
+  - tolo (1.0.3)
 
 DEPENDENCIES:
   - Expecta (~> 0.2)
   - OCMock (~> 2.2.2)
+  - SAMKeychain (~> 1.5.2)
   - Specta (~> 0.2.1)
-  - SSKeychain (~> 1.2.2)
+  - tolo (~> 1.0)
 
 SPEC CHECKSUMS:
-  Expecta: a354d4633409dd9fe8c4f5ff5130426adbe31628
+  Expecta: 78b4e8b0c8291fa4524d7f74016b6065c2e391ec
   OCMock: a6a7dc0e3997fb9f35d99f72528698ebf60d64f2
+  SAMKeychain: 1865333198217411f35327e8da61b43de79b635b
   Specta: 15a276a6343867b426d5ed135d5aa4d04123a573
-  SSKeychain: 88767e903ee8d274ed380e364d96b7a101235286
+  tolo: 29c7bef885a6dd6773f9dfe2dfcd961c53c526c4
 
-COCOAPODS: 0.37.2
+PODFILE CHECKSUM: 5b3ca3c8db925b13fc4b8c38e1cdecff6ae9dfe5
+
+COCOAPODS: 1.2.1
