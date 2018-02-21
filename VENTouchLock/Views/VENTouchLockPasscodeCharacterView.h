@@ -12,4 +12,7 @@
  */
 @property (strong, nonatomic) UIColor *fillColor;
 
+@property (strong, nonatomic) UIColor *circleFillColor;
+@property (strong, nonatomic) UIColor *hyphenFillColor;
+
 @end

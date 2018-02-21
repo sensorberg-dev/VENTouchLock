@@ -10,7 +10,17 @@
 @property (strong, nonatomic) UIColor *passcodeViewControllerTitleColor;
 @property (strong, nonatomic) UIFont *passcodeViewControllerTitleFont;
 @property (strong, nonatomic) UIColor *passcodeViewControllerCharacterColor;
+@property (strong, nonatomic) UIColor *passcodeViewControllerEmptyCharacterColor;
 @property (strong, nonatomic) UIColor *passcodeViewControllerBackgroundColor;
+
+@property (assign, nonatomic) UIStatusBarStyle statusBarStyle;
+
+@property (strong, nonatomic) UIImage *passcodeViewControllerBackgroundImage;
+@property (strong, nonatomic) UIImage *passcodeViewControllerLogoImage;
+
+@property (assign, nonatomic) CGFloat passcodeViewControllerBackgroundImageWidthRatio;
+@property (assign, nonatomic) CGFloat passcodeViewControllerBackgroundImageHeightRatio;
+
 /**
  The gap between title label and dotted characters
  */

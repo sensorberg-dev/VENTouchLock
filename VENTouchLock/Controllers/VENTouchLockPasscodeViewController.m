@@ -44,6 +44,10 @@ static const NSInteger VENTouchLockViewControllerPasscodeLength = 4;
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    [self configureBackgroundImage];
+    [self configureLogoImage];
+    
     if (![self.invisiblePasscodeField isFirstResponder]) {
         [self.invisiblePasscodeField becomeFirstResponder];
     }
@@ -55,6 +59,28 @@ static const NSInteger VENTouchLockViewControllerPasscodeLength = 4;
     if ([self.invisiblePasscodeField isFirstResponder]) {
         [self.invisiblePasscodeField resignFirstResponder];
     }
+}
+
+- (void)configureBackgroundImage
+{
+    if (self.touchLock.appearance.passcodeViewControllerBackgroundImage) {
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:self.touchLock.appearance.passcodeViewControllerBackgroundImage];
+        imageView.contentMode = UIViewContentModeScaleAspectFill;
+        CGRect frame = self.view.frame;
+        CGFloat width = CGRectGetWidth(frame);
+        CGFloat height = CGRectGetHeight(frame);
+        imageView.frame = CGRectMake((width - (width * self.touchLock.appearance.passcodeViewControllerBackgroundImageWidthRatio))/2,
+                                     0,
+                                     width * [VENTouchLock sharedInstance].appearance.passcodeViewControllerBackgroundImageWidthRatio,
+                                     height * [VENTouchLock sharedInstance].appearance.passcodeViewControllerBackgroundImageHeightRatio);
+        [self.view addSubview:imageView];
+        [self.view sendSubviewToBack:imageView];
+    }
+}
+
+- (void)configureLogoImage
+{
+    [self.passcodeView setLogoImage:[VENTouchLock sharedInstance].appearance.passcodeViewControllerLogoImage];
 }
 
 - (void)configureInvisiblePasscodeField
@@ -80,9 +106,15 @@ static const NSInteger VENTouchLockViewControllerPasscodeLength = 4;
     passcodeView.titleFont = self.touchLock.appearance.passcodeViewControllerTitleFont;
     passcodeView.verticalGapTitleAndCharacter = self.touchLock.appearance.passcodeViewVerticalGapTitleAndCharacter;
     passcodeView.characterColor = self.touchLock.appearance.passcodeViewControllerCharacterColor;
+    passcodeView.emptyCharacterColor = self.touchLock.appearance.passcodeViewControllerEmptyCharacterColor;
+    
     [self.view addSubview:passcodeView];
     self.passcodeView = passcodeView;
     self.passcodeView.frame = self.view.bounds;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return self.touchLock.appearance.statusBarStyle;
 }
 
 - (void)userTappedCancel
@@ -114,8 +146,11 @@ static const NSInteger VENTouchLockViewControllerPasscodeLength = 4;
 - (void)keyboardWillShow:(NSNotification *)notification
 {
     CGRect newKeyboardFrame = [(NSValue *)[notification.userInfo objectForKey:@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
-        CGFloat passcodeLockViewHeight = CGRectGetHeight(self.view.frame) - CGRectGetHeight(newKeyboardFrame);
-        CGFloat passcodeLockViewWidth = CGRectGetWidth(self.view.frame);
+    CGFloat passcodeLockViewHeight = CGRectGetHeight(self.view.frame) - CGRectGetHeight(newKeyboardFrame);
+    if (passcodeLockViewHeight >= CGRectGetHeight(self.view.frame) * 0.6f) {
+        passcodeLockViewHeight = CGRectGetHeight(self.view.frame);
+    }
+    CGFloat passcodeLockViewWidth = CGRectGetWidth(self.view.frame);
     self.passcodeView.frame = CGRectMake(0, 0, passcodeLockViewWidth, passcodeLockViewHeight);
 }
 

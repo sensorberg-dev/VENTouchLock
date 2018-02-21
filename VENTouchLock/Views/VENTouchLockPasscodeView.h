@@ -28,6 +28,11 @@
 @property (strong, nonatomic) UIColor *characterColor;
 
 /**
+ The color of the passcode characters.
+ */
+@property (strong, nonatomic) UIColor *emptyCharacterColor;
+
+/**
  The gap between title label and dotted characters
  */
 @property (assign, nonatomic) CGFloat verticalGapTitleAndCharacter;
@@ -42,10 +47,14 @@
  */
 - (instancetype)initWithTitle:(NSString *)title frame:(CGRect)frame titleColor:(UIColor *)titleColor titleFont:(UIFont *)font characterColor:(UIColor *)characterColor;
 
+- (instancetype)initWithTitle:(NSString *)title frame:(CGRect)frame titleColor:(UIColor *)titleColor titleFont:(UIFont *)font characterColor:(UIColor *)characterColor emptyCharacterColor:(UIColor *)emptyCharacterColor;
+
 /**
  Shakes the reciever and vibrates the device.
  @param completionBlock called after shake and vibrate complete
  */
-- (void)shakeAndVibrateCompletion:(void (^)())completionBlock;
+- (void)shakeAndVibrateCompletion:(void (^)(void))completionBlock;
+
+- (void)setLogoImage:(UIImage *)logo;
 
 @end

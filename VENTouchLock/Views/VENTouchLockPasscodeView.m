@@ -3,13 +3,17 @@
 #import <AudioToolbox/AudioToolbox.h>
 
 @interface VENTouchLockPasscodeView ()
-
+@property (weak, nonatomic) IBOutlet UIImageView *logoImageView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet VENTouchLockPasscodeCharacterView *firstCharacter;
 @property (weak, nonatomic) IBOutlet VENTouchLockPasscodeCharacterView *secondCharacter;
 @property (weak, nonatomic) IBOutlet VENTouchLockPasscodeCharacterView *thirdCharacter;
 @property (weak, nonatomic) IBOutlet VENTouchLockPasscodeCharacterView *fourthCharacter;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *gapBetweenNumberAndTitle;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *numberVerticalCenter;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *logoWidth;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *logoHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *gapBetweenLogoAndTitle;
 
 @end
 
@@ -46,6 +50,17 @@
     return self;
 }
 
+- (instancetype)initWithTitle:(NSString *)title frame:(CGRect)frame titleColor:(UIColor *)titleColor titleFont:(UIFont *)font characterColor:(UIColor *)characterColor emptyCharacterColor:(UIColor *)emptyCharacterColor
+{
+    if (self = [self initWithTitle:title frame:frame titleColor:titleColor titleFont:font characterColor:characterColor]) {
+        for (VENTouchLockPasscodeCharacterView *characterView in _characters) {
+            characterView.hyphenFillColor = emptyCharacterColor;
+        }
+    }
+    
+    return self;
+}
+
 - (instancetype)initWithTitle:(NSString *)title frame:(CGRect)frame;
 {
     return [self initWithTitle:title frame:frame titleColor:[UIColor blackColor] titleFont:nil characterColor:[UIColor blackColor]];
@@ -61,7 +76,7 @@
     return [self initWithFrame:CGRectZero];
 }
 
-- (void)shakeAndVibrateCompletion:(void (^)())completionBlock
+- (void)shakeAndVibrateCompletion:(void (^)(void))completionBlock
 {
     AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
     [CATransaction begin];
@@ -100,6 +115,14 @@
     }
 }
 
+- (void)setEmptyCharacterColor:(UIColor *)emptyCharacterColor
+{
+    _emptyCharacterColor = emptyCharacterColor;
+    for (VENTouchLockPasscodeCharacterView *characterView in self.characters) {
+        characterView.hyphenFillColor = emptyCharacterColor;
+    }
+}
+
 - (void)setTitleColor:(UIColor *)titleColor {
     _titleColor = titleColor;
     self.titleLabel.textColor = titleColor;
@@ -116,4 +139,15 @@
     [self setNeedsUpdateConstraints];
 }
 
+- (void)setLogoImage:(UIImage *)logo {
+    self.logoImageView.image = logo;
+    if (logo) {
+        self.numberVerticalCenter.constant = self.gapBetweenLogoAndTitle.constant;
+        self.logoWidth.constant = logo.size.width;
+        self.logoHeight.constant = logo.size.height;
+    } else {
+        self.numberVerticalCenter.constant = 0.0f;
+    }
+    [self setNeedsUpdateConstraints];
+}
 @end
