@@ -207,4 +207,12 @@ static const NSInteger VENTouchLockViewControllerPasscodeLength = 4;
     }
 }
 
+#pragma mark - Accessors
+
+- (VENTouchLock *)touchLock {
+    if (!_touchLock) {
+        _touchLock = [VENTouchLock sharedInstance];
+    }
+    return _touchLock;
+}
 @end
